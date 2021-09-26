@@ -4,7 +4,7 @@ from time import sleep
 program = """
 BPF_HASH(clones);
 
-int hello_world(void *ctx){
+int c_code(void *ctx){
   u64 uid;
   u64 counter=0;
   u64 *p;
@@ -25,7 +25,7 @@ int hello_world(void *ctx){
 b = BPF(text=program)
 
 clones = b.get_syscall_fnname("clone")
-b.attach_kprobe(event=clones, fn_name="hello_world")
+b.attach_kprobe(event=clones, fn_name="c_code")
 
 while True:
     sleep(2)
